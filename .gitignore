@@ -1,0 +1,20 @@
+# Vim.
+*.swp
+
+# OSX
+.DS_Store
+
+# Npm modules.
+node_modules
+
+# Test output.
+tmp
+
+# Documentation output.
+doc/*.html
+doc/assets
+doc/classes
+doc/files
+
+# Node packaging output.
+codo-theme-yaml-*.tgz

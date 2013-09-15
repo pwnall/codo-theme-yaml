@@ -1,0 +1,33 @@
+---
+name: <%- JSON.stringify @mixinData.mixin.mixinName %>
+file: <%- JSON.stringify @mixinData.file %>
+
+<% if @mixinData.doc: %>
+abstract: <%- !!(@mixinData.doc.abstract || @mixinData.doc.abstract is '') %>
+deprecated: <%- !!(@mixinData.doc.deprecated || @mixinData.doc.deprecated is '') %>
+private: <%- !!(@mixinData.doc.private || @mixinData.doc.private is '') %>
+concern: <%- !!(@mixinData.mixin.concern || @mixinData.mixin.concern is '') %>
+<% end %>
+
+extendedIn:
+<% for clazz in @extendedIn: %>
+  - name: <%- JSON.stringify clazz %>
+    href: <%- JSON.stringify "#{ @path }classes/#{ clazz.replace(/\./g, '/') }.yaml" %>
+<% end %>
+
+includedIn:
+<% for clazz in @includedIn: %>
+  - name: <%- JSON.stringify clazz %>
+    href: <%- JSON.stringify "#{ @path }classes/#{ clazz.replace(/\./g, '/') }.yaml" %>
+<% end %>
+
+<% if @mixinData.doc: %>
+doc:
+<%- @JST['partials/doc']( doc: @mixinData.doc, type: 'mixin', path: @path, referencer: @referencer, parent: @ ) %>
+<% end %>
+
+<% if @methods.length isnt 0: %>
+methods:
+<%- @JST['partials/method_list']( methods: @methods, parent: @ ) %>
+<% end %>
+
